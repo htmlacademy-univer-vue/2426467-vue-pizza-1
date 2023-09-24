@@ -120,13 +120,12 @@
     width: 32px;
     height: 32px;
     margin-right: 8px;
-    content: '';
+    content: "";
     vertical-align: middle;
     background: url("@/assets/img/login.svg") no-repeat center;
     background-size: auto 50%;
   }
 }
-
 
 .header__login {
   &::after {
@@ -134,7 +133,7 @@
     width: 32px;
     height: 32px;
     margin-left: 8px;
-    content: '';
+    content: "";
     vertical-align: middle;
     background: url("@/assets/img/login.svg") no-repeat center;
     background-size: auto 50%;

@@ -84,10 +84,10 @@
                     :key="ingredient.id"
                     class="ingredients__item"
                   >
-                    <span :class="`filling filling--${INGREDIENTS[ingredient.id]}`">{{
-                      ingredient.name
-                    }}</span>
-
+                    <span
+                      :class="`filling filling--${INGREDIENTS[ingredient.id]}`"
+                      >{{ ingredient.name }}</span
+                    >
                     <div class="counter counter--orange ingredients__counter">
                       <button
                         type="button"
@@ -457,7 +457,6 @@ import ingredients from "../mocks/ingredients.json";
     background-repeat: no-repeat;
     background-position: center;
     background-size: 80% 80%;
-
   }
 
   &--tomatoes::before {
@@ -703,7 +702,7 @@ import ingredients from "../mocks/ingredients.json";
     left: 0;
     width: 100%;
     height: 100%;
-    content: '';
+    content: "";
     background-image: inherit;
   }
 
