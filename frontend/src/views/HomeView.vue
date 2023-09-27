@@ -2,11 +2,11 @@
   <main class="content">
     <form action="#" method="post">
       <div class="content__wrapper">
-        <h1 class="title title--big">Конструктор пиццы</h1>
+        <Title variant="big">Конструктор пиццы</Title>
 
         <div class="content__dough">
           <div class="sheet">
-            <h2 class="title title--small sheet__title">Выберите тесто</h2>
+            <Title class="sheet__title">Выберите тесто</Title>
 
             <div class="sheet__content dough">
               <label
@@ -30,7 +30,7 @@
 
         <div class="content__diameter">
           <div class="sheet">
-            <h2 class="title title--small sheet__title">Выберите размер</h2>
+            <Title class="sheet__title">Выберите размер</Title>
 
             <div class="sheet__content diameter">
               <label
@@ -53,9 +53,9 @@
 
         <div class="content__ingredients">
           <div class="sheet">
-            <h2 class="title title--small sheet__title">
+            <Title class="sheet__title">
               Выберите ингредиенты
-            </h2>
+            </Title>
 
             <div class="sheet__content ingredients">
               <div class="ingredients__sauce">
@@ -155,6 +155,8 @@ import SAUCES from "../common/data/sauces.js";
 import sauces from "../mocks/sauces.json";
 import INGREDIENTS from "../common/data/ingredients.js";
 import ingredients from "../mocks/ingredients.json";
+
+import { Title } from "@/common/components";
 </script>
 
 <style lang="scss" scoped>
@@ -223,21 +225,6 @@ import ingredients from "../mocks/ingredients.json";
   button {
     margin-left: 12px;
     padding: 16px 45px;
-  }
-}
-
-.title {
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0;
-  color: $black;
-
-  &--big {
-    @include b-s36-h42;
-  }
-
-  &--small {
-    @include b-s18-h21;
   }
 }
 
