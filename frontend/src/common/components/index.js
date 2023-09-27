@@ -1,1 +1,2 @@
-export { default as Title } from "./Title.vue";
+export { default as VariableTitle } from "./VariableTitle.vue";
+export { default as SheetCard } from "./SheetCard.vue";

@@ -1,5 +1,7 @@
 <template>
-  <component :is="VARIANTS[variant].tag" :class="`title title--${variant}`"><slot /></component>
+  <component :is="VARIANTS[variant].tag" :class="`title title--${variant}`"
+    ><slot
+  /></component>
 </template>
 
 <script setup>
@@ -7,15 +9,15 @@ defineProps({
   variant: {
     type: String,
     default: "small",
-    validator: value => Object.keys(VARIANTS).includes(value),
+    validator: (value) => Object.keys(VARIANTS).includes(value),
   },
 });
 </script>
 
 <script>
 const VARIANTS = {
-  small: { tag: 'h2' },
-  big: { tag: 'h1' },
+  small: { tag: "h2" },
+  big: { tag: "h1" },
 };
 </script>
 

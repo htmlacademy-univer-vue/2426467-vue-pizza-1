@@ -2,118 +2,108 @@
   <main class="content">
     <form action="#" method="post">
       <div class="content__wrapper">
-        <Title variant="big">Конструктор пиццы</Title>
+        <variable-title variant="big">Конструктор пиццы</variable-title>
 
         <div class="content__dough">
-          <div class="sheet">
-            <Title class="sheet__title">Выберите тесто</Title>
-
-            <div class="sheet__content dough">
-              <label
-                v-for="(doughWeight, i) in doughWeights"
-                :key="doughWeight.id"
-                class="dough__input dough__input--light"
-              >
-                <input
-                  type="radio"
-                  name="dought"
-                  :value="DOUGH_WEIGHTS[doughWeight.id]"
-                  class="visually-hidden"
-                  :checked="i === 0"
-                />
-                <b>{{ doughWeight.name }}</b>
-                <span>{{ doughWeight.description }}</span>
-              </label>
-            </div>
-          </div>
+          <sheet-card>
+            <template #title>Выберите тесто</template>
+            <label
+              v-for="(doughWeight, i) in doughWeights"
+              :key="doughWeight.id"
+              class="dough__input dough__input--light"
+            >
+              <input
+                type="radio"
+                name="dought"
+                :value="DOUGH_WEIGHTS[doughWeight.id]"
+                class="visually-hidden"
+                :checked="i === 0"
+              />
+              <b>{{ doughWeight.name }}</b>
+              <span>{{ doughWeight.description }}</span>
+            </label>
+          </sheet-card>
         </div>
 
         <div class="content__diameter">
-          <div class="sheet">
-            <Title class="sheet__title">Выберите размер</Title>
-
-            <div class="sheet__content diameter">
-              <label
-                v-for="(diameter, i) in diameters"
-                :key="diameter.id"
-                class="diameter__input diameter__input--small"
-              >
-                <input
-                  type="radio"
-                  name="diameter"
-                  :value="DIAMETERS[diameter.id]"
-                  class="visually-hidden"
-                  :checked="i === 0"
-                />
-                <span>{{ diameter.name }}</span>
-              </label>
-            </div>
-          </div>
+          <sheet-card>
+            <template #title>Выберите размер</template>
+            <label
+              v-for="(diameter, i) in diameters"
+              :key="diameter.id"
+              class="diameter__input diameter__input--small"
+            >
+              <input
+                type="radio"
+                name="diameter"
+                :value="DIAMETERS[diameter.id]"
+                class="visually-hidden"
+                :checked="i === 0"
+              />
+              <span>{{ diameter.name }}</span>
+            </label>
+          </sheet-card>
         </div>
 
         <div class="content__ingredients">
-          <div class="sheet">
-            <Title class="sheet__title">
-              Выберите ингредиенты
-            </Title>
-
-            <div class="sheet__content ingredients">
-              <div class="ingredients__sauce">
-                <p>Основной соус:</p>
-                <label
-                  v-for="(sauce, i) in sauces"
-                  :key="sauce.id"
-                  class="radio ingredients__input"
-                >
-                  <input
-                    type="radio"
-                    name="sauce"
-                    :value="SAUCES[sauce.id]"
-                    :checked="i === 0"
-                  />
-                  <span>{{ sauce.name }}</span>
-                </label>
-              </div>
-
-              <div class="ingredients__filling">
-                <p>Начинка:</p>
-
-                <ul class="ingredients__list">
-                  <li
-                    v-for="ingredient in ingredients"
-                    :key="ingredient.id"
-                    class="ingredients__item"
-                  >
-                    <span
-                      :class="`filling filling--${INGREDIENTS[ingredient.id]}`"
-                      >{{ ingredient.name }}</span
-                    >
-                    <div class="counter counter--orange ingredients__counter">
-                      <button
-                        type="button"
-                        class="counter__button counter__button--minus"
-                        disabled
-                      >
-                        <span class="visually-hidden">Меньше</span>
-                      </button>
-                      <input
-                        type="text"
-                        name="counter"
-                        class="counter__input"
-                        value="0"
-                      />
-                      <button
-                        type="button"
-                        class="counter__button counter__button--plus"
-                      >
-                        <span class="visually-hidden">Больше</span>
-                      </button>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+          <sheet-card>
+            <template #title>Выберите ингредиенты</template>
+            <div class="ingredients__sauce">
+              <p>Основной соус:</p>
+              <label
+                v-for="(sauce, i) in sauces"
+                :key="sauce.id"
+                class="radio ingredients__input"
+              >
+                <input
+                  type="radio"
+                  name="sauce"
+                  :value="SAUCES[sauce.id]"
+                  :checked="i === 0"
+                />
+                <span>{{ sauce.name }}</span>
+              </label>
             </div>
-          </div>
+
+            <div class="ingredients__filling">
+              <p>Начинка:</p>
+
+              <ul class="ingredients__list">
+                <li
+                  v-for="ingredient in ingredients"
+                  :key="ingredient.id"
+                  class="ingredients__item"
+                >
+                  <span
+                    :class="`filling filling--${INGREDIENTS[ingredient.id]}`"
+                    >{{ ingredient.name }}</span
+                  >
+
+                  <div class="counter counter--orange ingredients__counter">
+                    <button
+                      type="button"
+                      class="counter__button counter__button--minus"
+                      disabled
+                    >
+                      <span class="visually-hidden">Меньше</span>
+                    </button>
+                    <input
+                      type="text"
+                      name="counter"
+                      class="counter__input"
+                      value="0"
+                    />
+                    <button
+                      type="button"
+                      class="counter__button counter__button--plus"
+                    >
+                      <span class="visually-hidden">Больше</span>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </sheet-card>
         </div>
 
         <div class="content__pizza">
@@ -156,7 +146,7 @@ import sauces from "../mocks/sauces.json";
 import INGREDIENTS from "../common/data/ingredients.js";
 import ingredients from "../mocks/ingredients.json";
 
-import { Title } from "@/common/components";
+import { VariableTitle, SheetCard } from "@/common/components";
 </script>
 
 <style lang="scss" scoped>
@@ -226,29 +216,6 @@ import { Title } from "@/common/components";
     margin-left: 12px;
     padding: 16px 45px;
   }
-}
-
-.sheet {
-  padding-top: 15px;
-  border-radius: 8px;
-  background-color: $white;
-  box-shadow: $shadow-light;
-}
-
-.sheet__title {
-  padding-right: 18px;
-  padding-left: 18px;
-}
-
-.sheet__content {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 8px;
-  padding-top: 18px;
-  padding-right: 18px;
-  padding-left: 18px;
-  border-top: 1px solid rgba($green-500, 0.1);
 }
 
 .dough__input {
