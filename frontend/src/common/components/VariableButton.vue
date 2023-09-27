@@ -1,5 +1,7 @@
 <template>
-  <button type="button" class="button" :disabled="disabled"><slot /></button>
+  <button type="button" class="variable-button" :disabled="disabled">
+    <slot />
+  </button>
 </template>
 
 <script setup>
@@ -11,7 +13,7 @@ defineProps({
 <style lang="scss" scoped>
 @import "@/assets/scss/app.scss";
 
-.button {
+.variable-button {
   $bl: &;
   @include b-s18-h21;
 

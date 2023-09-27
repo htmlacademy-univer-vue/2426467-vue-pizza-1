@@ -1,7 +1,9 @@
 <template>
-  <div class="sheet">
-    <variable-title class="sheet__title"><slot name="title" /></variable-title>
-    <div class="sheet__content">
+  <div class="sheet-card">
+    <variable-title class="sheet-card__title"
+      ><slot name="title"
+    /></variable-title>
+    <div class="sheet-card__content">
       <slot />
     </div>
   </div>
@@ -14,19 +16,19 @@ import { VariableTitle } from "@/common/components";
 <style lang="scss" scoped>
 @import "@/assets/scss/app.scss";
 
-.sheet {
+.sheet-card {
   padding-top: 15px;
   border-radius: 8px;
   background-color: $white;
   box-shadow: $shadow-light;
 }
 
-.sheet__title {
+.sheet-card__title {
   padding-right: 18px;
   padding-left: 18px;
 }
 
-.sheet__content {
+.sheet-card__content {
   display: flex;
   align-items: center;
   flex-wrap: wrap;

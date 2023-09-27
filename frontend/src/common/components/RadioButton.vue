@@ -1,5 +1,5 @@
 <template>
-  <label class="radio">
+  <label class="radio-button">
     <input type="radio" :name="name" :value="value" :checked="checked" />
     <span><slot /></span>
   </label>
@@ -16,7 +16,7 @@ defineProps({
 <style lang="scss" scoped>
 @import "@/assets/scss/app.scss";
 
-.radio {
+.radio-button {
   cursor: pointer;
 
   span {

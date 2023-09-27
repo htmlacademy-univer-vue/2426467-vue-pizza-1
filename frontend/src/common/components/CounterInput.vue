@@ -1,8 +1,8 @@
 <template>
-  <div class="counter counter--orange">
+  <div class="counter-input counter-input--orange">
     <button
       type="button"
-      class="counter__button counter__button--minus"
+      class="counter-input__button counter-input__button--minus"
       :disabled="currentCounter < 1"
       @click="decreaseCounter"
     >
@@ -10,14 +10,14 @@
     </button>
     <input
       type="text"
-      name="counter"
-      class="counter__input"
+      name="counter-input"
+      class="counter-input__input"
       :value="String(currentCounter)"
       @change="setCounter"
     />
     <button
       type="button"
-      class="counter__button counter__button--plus"
+      class="counter-input__button counter-input__button--plus"
       @click="increaseCounter"
     >
       <span class="visually-hidden">Больше</span>
@@ -49,13 +49,13 @@ function setCounter(event) {
 <style lang="scss" scoped>
 @import "@/assets/scss/app.scss";
 
-.counter {
+.counter-input {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.counter__button {
+.counter-input__button {
   $el: &;
   $size_icon: 50%;
 
@@ -160,7 +160,7 @@ function setCounter(event) {
   }
 }
 
-.counter__input {
+.counter-input__input {
   @include r-s14-h16;
 
   box-sizing: border-box;

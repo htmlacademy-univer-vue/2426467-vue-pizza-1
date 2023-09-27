@@ -1,5 +1,5 @@
 <template>
-  <label class="input">
+  <label class="variable-input">
     <span class="visually-hidden">{{ label }}</span>
     <input type="text" :name="name" :placeholder="placeholder" />
   </label>
@@ -16,7 +16,7 @@ defineProps({
 <style lang="scss" scoped>
 @import "@/assets/scss/app.scss";
 
-.input {
+.variable-input {
   display: block;
 
   span {

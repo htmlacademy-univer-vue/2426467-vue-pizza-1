@@ -1,5 +1,7 @@
 <template>
-  <component :is="VARIANTS[variant].tag" :class="`title title--${variant}`"
+  <component
+    :is="VARIANTS[variant].tag"
+    :class="`variable-title variable-title--${variant}`"
     ><slot
   /></component>
 </template>
@@ -24,7 +26,7 @@ const VARIANTS = {
 <style lang="scss" scoped>
 @import "@/assets/scss/app.scss";
 
-.title {
+.variable-title {
   box-sizing: border-box;
   width: 100%;
   margin: 0;
