@@ -50,19 +50,16 @@
             <template #title>Выберите ингредиенты</template>
             <div class="ingredients__sauce">
               <p>Основной соус:</p>
-              <label
+              <radio-button
                 v-for="(sauce, i) in sauces"
                 :key="sauce.id"
-                class="radio ingredients__input"
+                class="ingredients__input"
+                name="sauce"
+                :value="SAUCES[sauce.id]"
+                :checked="i === 0"
               >
-                <input
-                  type="radio"
-                  name="sauce"
-                  :value="SAUCES[sauce.id]"
-                  :checked="i === 0"
-                />
-                <span>{{ sauce.name }}</span>
-              </label>
+                {{ sauce.name }}
+              </radio-button>
             </div>
 
             <div class="ingredients__filling">
@@ -146,7 +143,7 @@ import sauces from "../mocks/sauces.json";
 import INGREDIENTS from "../common/data/ingredients.js";
 import ingredients from "../mocks/ingredients.json";
 
-import { VariableTitle, SheetCard } from "@/common/components";
+import { VariableTitle, SheetCard, RadioButton } from "@/common/components";
 </script>
 
 <style lang="scss" scoped>
@@ -920,63 +917,6 @@ import { VariableTitle, SheetCard } from "@/common/components";
   &--white {
     background-color: $white;
     color: $green-500;
-  }
-}
-
-.radio {
-  cursor: pointer;
-
-  span {
-    @include r-s16-h19;
-    position: relative;
-    padding-left: 28px;
-
-    &:before {
-      @include p_center-v;
-
-      display: block;
-      box-sizing: border-box;
-      width: 20px;
-      height: 20px;
-      content: "";
-      transition: 0.3s;
-      border: 1px solid $purple-400;
-      border-radius: 50%;
-      background-color: $white;
-    }
-  }
-
-  &:hover {
-    input:not(:checked):not(:disabled) + span {
-      &:before {
-        border-color: $purple-800;
-      }
-    }
-  }
-
-  input {
-    display: none;
-
-    &:checked + span {
-      &:before {
-        border: 6px solid $green-500;
-      }
-    }
-
-    &:disabled {
-      & + span {
-        &:before {
-          border-color: $purple-400;
-          background-color: $silver-200;
-        }
-      }
-
-      &:checked + span {
-        &:before {
-          border: 6px solid $purple-400;
-        }
-      }
-    }
   }
 }
 </style>
