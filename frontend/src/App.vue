@@ -4,6 +4,11 @@
   </app-layout>
 </template>
 
+<script setup>
+import { HomeView } from "@/views";
+import { AppLayout } from "@/layouts";
+</script>
+
 <style lang="scss">
 @import "@/assets/scss/ds-system/ds.scss";
 
@@ -30,11 +35,6 @@ img {
   height: auto;
 }
 </style>
-
-<script setup>
-import { HomeView } from "@/views";
-import { AppLayout } from "@/layouts";
-</script>
 
 <style lang="scss">
 @import "@/assets/scss/ds-system/ds.scss";

@@ -4,21 +4,20 @@
       type="button"
       class="counter-input__button counter-input__button--minus"
       :disabled="currentCounter < 1"
-      @click="decreaseCounter"
+      @click="decreaseCounter()"
     >
       <span class="visually-hidden">Меньше</span>
     </button>
     <input
+      v-model.number="currentCounter"
       type="text"
       name="counter-input"
       class="counter-input__input"
-      :value="String(currentCounter)"
-      @change="setCounter"
     />
     <button
       type="button"
       class="counter-input__button counter-input__button--plus"
-      @click="increaseCounter"
+      @click="increaseCounter()"
     >
       <span class="visually-hidden">Больше</span>
     </button>
@@ -26,11 +25,33 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed } from "vue";
 
-const NUMBER_REGEXP = /\d+/g;
+const NOT_NUMBER_REGEXP = /[^\d]/g;
 
-const currentCounter = ref(0);
+const emit = defineEmits(["update:modelValue"]);
+
+const props = defineProps({
+  modelValue: { type: Number, required: true },
+});
+
+const currentCounter = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(newCounterValue) {
+    let newCounterValueSafe = 0;
+    if (typeof newCounterValue === "number") {
+      newCounterValueSafe = newCounterValue;
+    } else if (typeof newCounterValue === "string") {
+      newCounterValueSafe = Number(
+        newCounterValue.replace(NOT_NUMBER_REGEXP, "")
+      );
+    }
+
+    emit("update:modelValue", newCounterValueSafe);
+  },
+});
 
 function increaseCounter() {
   currentCounter.value += 1;
@@ -38,11 +59,6 @@ function increaseCounter() {
 
 function decreaseCounter() {
   currentCounter.value -= 1;
-}
-
-function setCounter(event) {
-  currentCounter.value =
-    Number((event.target.value.match(NUMBER_REGEXP) || []).join("")) || 0;
 }
 </script>
 

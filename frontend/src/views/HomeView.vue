@@ -7,79 +7,31 @@
         <div class="content__dough">
           <sheet-card>
             <template #title>Выберите тесто</template>
-            <label
-              v-for="(doughWeight, i) in doughWeights"
-              :key="doughWeight.id"
-              class="dough__input dough__input--light"
-            >
-              <input
-                type="radio"
-                name="dought"
-                :value="DOUGH_WEIGHTS[doughWeight.id]"
-                class="visually-hidden"
-                :checked="i === 0"
-              />
-              <b>{{ doughWeight.name }}</b>
-              <span>{{ doughWeight.description }}</span>
-            </label>
+            <constructor-dough-weights
+              v-model="selectedDoughWeight"
+              :available="doughWeights"
+            />
           </sheet-card>
         </div>
 
         <div class="content__diameter">
           <sheet-card>
             <template #title>Выберите размер</template>
-            <label
-              v-for="(diameter, i) in diameters"
-              :key="diameter.id"
-              class="diameter__input diameter__input--small"
-            >
-              <input
-                type="radio"
-                name="diameter"
-                :value="DIAMETERS[diameter.id]"
-                class="visually-hidden"
-                :checked="i === 0"
-              />
-              <span>{{ diameter.name }}</span>
-            </label>
+            <constructor-diameters
+              v-model="selectedDiameter"
+              :available="diameters"
+            />
           </sheet-card>
         </div>
 
         <div class="content__ingredients">
           <sheet-card>
             <template #title>Выберите ингредиенты</template>
-            <div class="ingredients__sauce">
-              <p>Основной соус:</p>
-              <radio-button
-                v-for="(sauce, i) in sauces"
-                :key="sauce.id"
-                class="ingredients__input"
-                name="sauce"
-                :value="SAUCES[sauce.id]"
-                :checked="i === 0"
-              >
-                {{ sauce.name }}
-              </radio-button>
-            </div>
-
-            <div class="ingredients__filling">
-              <p>Начинка:</p>
-
-              <ul class="ingredients__list">
-                <li
-                  v-for="ingredient in ingredients"
-                  :key="ingredient.id"
-                  class="ingredients__item"
-                >
-                  <span
-                    :class="`filling filling--${INGREDIENTS[ingredient.id]}`"
-                    >{{ ingredient.name }}</span
-                  >
-
-                  <counter-input class="ingredients__counter" />
-                </li>
-              </ul>
-            </div>
+            <constructor-sauces v-model="selectedSauce" :available="sauces" />
+            <constructor-ingredients
+              v-model="selectedIngredients"
+              :available="ingredients"
+            />
           </sheet-card>
         </div>
 
@@ -120,14 +72,31 @@ import sauces from "../mocks/sauces.json";
 import INGREDIENTS from "../common/data/ingredients.js";
 import ingredients from "../mocks/ingredients.json";
 
+import { ref } from "vue";
+
 import {
   VariableTitle,
   SheetCard,
-  RadioButton,
   VariableButton,
   VariableInput,
-  CounterInput,
 } from "@/common/components";
+
+import {
+  ConstructorDoughWeights,
+  ConstructorDiameters,
+  ConstructorSauces,
+  ConstructorIngredients,
+} from "@/modules/constructor";
+
+const selectedDoughWeight = ref(DOUGH_WEIGHTS[doughWeights[0].id]);
+const selectedDiameter = ref(DIAMETERS[diameters[0].id]);
+const selectedSauce = ref(SAUCES[sauces[0].id]);
+const selectedIngredients = ref(
+  ingredients.reduce(
+    (acc, i) => ({ ...acc, [INGREDIENTS[i.id]]: { amount: 0 } }),
+    {}
+  )
+);
 </script>
 
 <style lang="scss" scoped>
@@ -196,262 +165,6 @@ import {
   button {
     margin-left: 12px;
     padding: 16px 45px;
-  }
-}
-
-.dough__input {
-  position: relative;
-  margin-right: 8%;
-  margin-bottom: 20px;
-  padding-left: 50px;
-  cursor: pointer;
-
-  b {
-    @include r-s16-h19;
-
-    &::before {
-      @include p_center-v;
-
-      width: 36px;
-      height: 36px;
-      content: "";
-      transition: 0.3s;
-      border-radius: 50%;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-    }
-  }
-
-  span {
-    @include l-s11-h13;
-
-    display: block;
-  }
-
-  &--light {
-    b {
-      &::before {
-        background-image: url("@/assets/img/dough-light.svg");
-      }
-    }
-  }
-
-  &--large {
-    b {
-      &::before {
-        background-image: url("@/assets/img/dough-large.svg");
-      }
-    }
-  }
-
-  &:hover {
-    b::before {
-      box-shadow: $shadow-regular;
-    }
-  }
-
-  input {
-    &:checked + b::before {
-      box-shadow: $shadow-large;
-    }
-  }
-}
-
-.diameter__input {
-  margin-right: 8.7%;
-  margin-bottom: 20px;
-  padding-top: 7px;
-  padding-bottom: 6px;
-  cursor: pointer;
-
-  span {
-    @include r-s16-h19;
-
-    position: relative;
-    padding-left: 46px;
-
-    &::before {
-      @include p_center_v;
-
-      width: 36px;
-      height: 36px;
-      content: "";
-      transition: 0.3s;
-      border-radius: 50%;
-      background-color: $green-100;
-      background-image: url("@/assets/img/diameter.svg");
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-  }
-
-  &:nth-child(3n) {
-    margin-right: 0;
-  }
-
-  &--small {
-    span::before {
-      background-size: 18px;
-    }
-  }
-
-  &--normal {
-    span::before {
-      background-size: 29px;
-    }
-  }
-
-  &--big {
-    span::before {
-      background-size: 100%;
-    }
-  }
-
-  &:hover {
-    span::before {
-      box-shadow: $shadow-regular;
-    }
-  }
-
-  input {
-    &:checked + span::before {
-      box-shadow: $shadow-large;
-    }
-  }
-}
-
-.ingredients__sauce {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-  margin-bottom: 14px;
-
-  p {
-    @include r-s16-h19;
-
-    margin-top: 0;
-    margin-right: 16px;
-    margin-bottom: 10px;
-  }
-}
-
-.ingredients__input {
-  margin-right: 24px;
-  margin-bottom: 10px;
-}
-
-.ingredients__filling {
-  width: 100%;
-
-  p {
-    @include r-s16-h19;
-
-    margin-top: 0;
-    margin-bottom: 16px;
-  }
-}
-
-.ingredients__list {
-  @include clear-list;
-
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.ingredients__item {
-  width: 100px;
-  min-height: 40px;
-  margin-right: 17px;
-  margin-bottom: 35px;
-}
-
-.ingredients__counter {
-  width: 54px;
-  margin-top: 10px;
-  margin-left: 36px;
-}
-
-.filling {
-  @include r-s14-h16;
-  position: relative;
-  display: block;
-  padding-left: 36px;
-
-  &::before {
-    @include p_center-v;
-
-    display: block;
-    width: 32px;
-    height: 32px;
-    content: "";
-    border-radius: 50%;
-    background-color: $white;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 80% 80%;
-  }
-
-  &--tomatoes::before {
-    background-image: url("@/assets/img/filling/tomatoes.svg");
-  }
-
-  &--ananas::before {
-    background-image: url("@/assets/img/filling/ananas.svg");
-  }
-
-  &--bacon::before {
-    background-image: url("@/assets/img/filling/bacon.svg");
-  }
-
-  &--blue_cheese::before {
-    background-image: url("@/assets/img/filling/blue_cheese.svg");
-  }
-
-  &--cheddar::before {
-    background-image: url("@/assets/img/filling/cheddar.svg");
-  }
-
-  &--chile::before {
-    background-image: url("@/assets/img/filling/chile.svg");
-  }
-
-  &--ham::before {
-    background-image: url("@/assets/img/filling/ham.svg");
-  }
-
-  &--jalapeno::before {
-    background-image: url("@/assets/img/filling/jalapeno.svg");
-  }
-
-  &--mozzarella::before {
-    background-image: url("@/assets/img/filling/mozzarella.svg");
-  }
-
-  &--mushrooms::before {
-    background-image: url("@/assets/img/filling/mushrooms.svg");
-  }
-
-  &--olives::before {
-    background-image: url("@/assets/img/filling/olives.svg");
-  }
-
-  &--onion::before {
-    background-image: url("@/assets/img/filling/onion.svg");
-  }
-
-  &--parmesan::before {
-    background-image: url("@/assets/img/filling/parmesan.svg");
-  }
-
-  &--salami::before {
-    background-image: url("@/assets/img/filling/salami.svg");
-  }
-
-  &--salmon::before {
-    background-image: url("@/assets/img/filling/salmon.svg");
   }
 }
 
