@@ -1,6 +1,6 @@
 <template>
-  <app-header />
-  <slot />
+  <AppHeader />
+  <router-view />
 </template>
 
 <script setup>
