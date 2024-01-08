@@ -1,64 +1,58 @@
 <template>
-  <app-layout>
-    <home-view />
-  </app-layout>
+  <AppHeader />
+  <AppLayout />
 </template>
 
 <script setup>
-import { HomeView } from "@/views";
-import { AppLayout } from "@/layouts";
+import AppHeader from "@/layouts/AppHeader.vue";
+import AppLayout from "@/layouts/AppLayout.vue";
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/ds-system/ds.scss";
-
+@import "@/assets/scss/app.scss";
 body {
-  display: flex;
-  flex-direction: column;
-  min-width: 960px;
-  min-height: 100vh;
-  margin: 0;
-  color: $black;
+  justify-content: center;
+  align-items: center;
+}
+.main__wrapper {
+  padding-bottom: 30px;
+
   background-color: $white;
-  font-family: "Roboto", Arial, sans-serif;
-  font-size: 14px;
-  line-height: 16px;
-  text-rendering: optimizeLegibility;
+  box-shadow: $shadow-light;
+
+  h1 {
+    margin-bottom: 0;
+    padding: 0 95px;
+
+    text-align: center;
+
+    @include b-s36-h42;
+  }
+
+  p {
+    padding: 0 95px;
+
+    text-align: center;
+
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  b {
+    font-size: 1.2em;
+  }
 }
 
-a {
-  text-decoration: none;
-}
+.main__header {
+  margin-bottom: 30px;
+  padding: 20px 0;
 
-img {
-  max-width: 100%;
-  height: auto;
-}
-</style>
+  background-color: $green-600;
 
-<style lang="scss">
-@import "@/assets/scss/ds-system/ds.scss";
+  img {
+    display: block;
 
-body {
-  display: flex;
-  flex-direction: column;
-  min-width: 960px;
-  min-height: 100vh;
-  margin: 0;
-  color: $black;
-  background-color: $white;
-  font-family: "Roboto", Arial, sans-serif;
-  font-size: 14px;
-  line-height: 16px;
-  text-rendering: optimizeLegibility;
-}
-
-a {
-  text-decoration: none;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
+    margin: 0 auto;
+  }
 }
 </style>
